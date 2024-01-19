@@ -1,22 +1,27 @@
 package com.mymower.automower.service;
 
 import com.mymower.automower.domain.Mower;
+import com.mymower.automower.exceptions.EmptyFileException;
 import com.mymower.automower.helper.CommandHelper;
 import com.mymower.automower.helper.GardenLimitHelper;
 import com.mymower.automower.helper.InitialPositionHelper;
 import com.mymower.automower.model.Position;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class MowerService {
     private List<Mower> mowers = new ArrayList<>();
 
     public void initialGardenWithMowers(final List<String> lines) {
         if (lines == null || lines.size() == 0) {
+            log.error("An empty lines List is provided, Cannot process");
+            throw new EmptyFileException();
         }
         String gardenLimit = lines.get(0);
         List<String> linesWithoutHeader = lines.stream().skip(1).collect(Collectors.toList());
