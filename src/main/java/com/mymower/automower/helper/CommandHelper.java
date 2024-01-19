@@ -1,27 +1,18 @@
 package com.mymower.automower.helper;
 
 import com.mymower.automower.model.Command;
-import io.micrometer.common.util.StringUtils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class CommandHelper
-{
-    public static boolean isValidLine(String line) {
-        return StringUtils.isNotBlank(line);
+public class CommandHelper {
+    public static boolean isValidCommandLine(String line) {
+        return line != null && !line.isBlank() && line.matches("^[ADG]+$");
     }
 
     public static List<Command> getCommandsOfMower(String line) {
         String[] split = line.split(" ");
-
-        List<Command> cmds = new ArrayList<Command>();
-        char [] listeCmds = split[1].toCharArray();
-
-        for (char c : listeCmds) {
-            cmds.add(Command.getCommandeFromCode(String.valueOf(c)));
-        }
-
-        return cmds;
+        return Arrays.stream(split[1].split("")).map(c -> Command.getCommandeFromCode(c)).collect(Collectors.toList());
     }
 }
