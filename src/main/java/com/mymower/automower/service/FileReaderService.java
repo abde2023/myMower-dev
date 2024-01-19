@@ -3,14 +3,12 @@ package com.mymower.automower.service;
 import com.mymower.automower.exceptions.CannotReadFileException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +22,7 @@ public class FileReaderService {
 
     /**
      * Read a file from path, file can be placed in classpath or from fileSystem
+     *
      * @param path
      * @return
      */

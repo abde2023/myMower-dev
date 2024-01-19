@@ -32,7 +32,8 @@ public class AutoMowerApplication implements CommandLineRunner {
 
 //TODO get file from args path , path can be like this "file:C:\\input.txt"
 
-        List<Position> finalPositionOfMowersFromFile = this.mowerService.getFinalPositionOfMowersFromFile("classpath:input.txt");
+        String inputFilePath = "classpath:input.txt";
+        List<Position> finalPositionOfMowersFromFile = this.mowerService.getFinalPositionOfMowersFromFile(inputFilePath);
 
         for (Position pos : finalPositionOfMowersFromFile) {
             StringBuilder printPosition = new StringBuilder();
