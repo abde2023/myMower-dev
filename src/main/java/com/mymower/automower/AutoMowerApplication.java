@@ -29,24 +29,19 @@ public class AutoMowerApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("AutoMowerApplication Start ... ");
-        InputStream resource = new ClassPathResource("input.txt").getInputStream();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(resource))) {
-            List<String> fileLines = reader.lines().collect(Collectors.toList());
-            log.debug("Application will process positions for {} ",fileLines);
 
-            mowerService.initialGardenWithMowers(fileLines);
-            List<Position> process = mowerService.process();
-            for (Position pos : process) {
-                StringBuilder printPosition = new StringBuilder();
-                printPosition.append(pos.getX());
-                printPosition.append(pos.getY());
-                printPosition.append(pos.getDirection().getCode());
-                log.debug("Mower final position is {}  ",printPosition);
-                System.out.println(printPosition);
-            }
-        } catch (IOException e) {
-            log.error("cannot read file {}", e.getMessage());
-            System.exit(1);
+//TODO get file from args path , path can be like this "file:C:\\input.txt"
+
+        List<Position> finalPositionOfMowersFromFile = this.mowerService.getFinalPositionOfMowersFromFile("classpath:input.txt");
+
+        for (Position pos : finalPositionOfMowersFromFile) {
+            StringBuilder printPosition = new StringBuilder();
+            printPosition.append(pos.getX());
+            printPosition.append(pos.getY());
+            printPosition.append(pos.getDirection().getCode());
+            log.debug("Mower final position is {}  ", printPosition);
+            System.out.println(printPosition);
         }
+
     }
 }

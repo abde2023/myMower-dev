@@ -1,7 +1,6 @@
 package com.mymower.automower.helper;
 
 import com.mymower.automower.exceptions.NotValidCommandLineException;
-import com.mymower.automower.exceptions.NotValidPositionException;
 import com.mymower.automower.model.Command;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +20,6 @@ public class CommandHelper {
             log.error("Invalid commands line : {} is provided in the file", split[1]);
             throw new NotValidCommandLineException();
         }
-        return Arrays.stream(split[1].split("")).map(c -> Command.getCommandeFromCode(c)).collect(Collectors.toList());
+        return Arrays.stream(split[1].split("")).map(c -> Command.getCommandFromCode(c)).collect(Collectors.toList());
     }
 }

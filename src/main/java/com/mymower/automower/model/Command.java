@@ -13,10 +13,10 @@ public enum Command {
         return code;
     }
 
-    public static Command getCommandeFromCode(final String code) {
-        for (Command commande : Command.values()) {
-            if (commande.getCode().equals(code)) {
-                return commande;
+    public static Command getCommandFromCode(final String code) {
+        for (Command command : Command.values()) {
+            if (command.getCode().equals(code)) {
+                return command;
             }
         }
         return null;
